@@ -20,7 +20,7 @@ pipeline {
         stage('Push Image') {
             steps {
                 script {
-                        docker.witRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         dockerapp.push('latest')
                         dockerapp.push("${env.BUILD_ID}")
                     }
@@ -28,6 +28,24 @@ pipeline {
                 }
             }
         }
+
+        // stage('Deploy Kubernetes') {
+        //     agent {
+        //         kubernetes {
+        //             cloud 'kubernetes'
+        //         }
+        //     }
+        //     environment {
+        //         tag_version = "${env.BUILD_ID}"
+        //     }
+        //     steps {
+        //         script {
+        //             sh 'sed -i "s/{{tag}}/$tag_version/g" .k8s/api/deployment.yaml'
+        //             sh 'cat ./k8s/api/deployment.yaml'
+        //             kubernetesDeploy(configs:'**/k8s/**', kubeconfigid: 'kube')
+        //         }
+        //     }
+        // }
 
     }
 }
