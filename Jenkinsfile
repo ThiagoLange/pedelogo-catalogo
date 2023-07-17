@@ -42,7 +42,7 @@ pipeline {
                 script {
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
                     sh 'cat ./k8s/api/deployment.yaml'
-                    kubernetes apply (configs: '**/k8s/**', kubeconfigId: 'kube')
+                    kubernetesAgent (configs: '**/k8s/**', kubeconfigId: 'kube')
                 }
             }
         }
