@@ -20,7 +20,7 @@ pipeline {
         stage('Push Image') {
             steps {
                 script {
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'docker') {
                         dockerapp.push('latest')
                         dockerapp.push("${env.BUILD_ID}")
                     }
@@ -42,7 +42,7 @@ pipeline {
                 script {
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
                     sh 'cat ./k8s/api/deployment.yaml'
-                    kubernetesAgent (configs: '**/k8s/**', kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: '**/k8s/**', kubeconfigId: 'kube')
                 }
             }
         }
