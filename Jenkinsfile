@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('heckout Source') {
+        stage('Checkout Source') {
             steps {
                 git url: 'https://github.com/ThiagoLange/pedelogo-catalogo.git', branch: 'main'
             }
@@ -42,7 +42,7 @@ pipeline {
                 script {
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
                     sh 'cat ./k8s/api/deployment.yaml'
-                    kubernetesAgent (configs: '**/k8s/**', kubeconfigId: 'kubernetes')
+                    kubernetesDeploy (configs: '**/k8s/**', kubeconfigId: 'kubernetes')
                 }
             }
         }
