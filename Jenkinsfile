@@ -44,8 +44,8 @@ pipeline {
                     sh 'cat ./k8s/api/deployment.yaml'
                     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
                     sh 'chmod u+x ./kubectl' 
-                    sh './kubectl --kubeconfig=/home/vagrant/.kube/config get pods'
-                    sh './kubectl --kubeconfig=/home/vagrant/.kube/config apply -f ./k8s -R'
+                    sh './kubectl --kubeconfig=kubernetes get pods'
+                    sh './kubectl --kubeconfig=kubernetes apply -f ./k8s -R'
                     // kubernetesDeploy (configs: '**/k8s/**', kubeconfigId: 'kubernetes')
                 }
             }
