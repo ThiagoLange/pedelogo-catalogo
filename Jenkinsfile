@@ -42,8 +42,8 @@ pipeline {
                 script {
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
                     sh 'cat ./k8s/api/deployment.yaml'
-                    // sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
-                    // sh 'chmod u+x ./kubectl' 
+                    sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+                    sh 'chmod u+x ./kubectl' 
                     sh 'kubectl -kubeconfig=/var/lib/jenkins/.kube/config get pods'
                     // sh './kubectl apply -f ./k8s -R'
                     // kubernetesDeploy (configs: '**/k8s/**', kubeconfigId: 'kubernetes')
