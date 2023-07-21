@@ -40,7 +40,6 @@ pipeline {
             }
             steps {
                 script {
-                    MY_KUBECONFIG=/var/lib/jenkins/.kube/config
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
                     sh 'cat ./k8s/api/deployment.yaml'
                     // sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
