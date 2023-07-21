@@ -39,16 +39,19 @@ pipeline {
                 tag_version = "${env.BUILD_ID}"
             }
             steps {
-                withKubeConfig([credentialsId: 'kubeconf', serverUrl: 'https://192.168.56.3'])
-                    script {
-                        sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
-                        sh 'cat ./k8s/api/deployment.yaml'
-                        // sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
-                        // sh 'chmod u+x ./kubectl' 
-                        sh 'kubectl get pods'
-                        // sh './kubectl apply -f ./k8s -R'
-                        // kubernetesDeploy (configs: '**/k8s/**', kubeconfigId: 'kubernetes')
-                    }
+            withKubeConfig([credentialsId: 'kubeconf', serverUrl: 'https://192.168.56.3']){
+                sh 'kubectl get pods'
+
+            }
+                    // script {
+                    //     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
+                    //     sh 'cat ./k8s/api/deployment.yaml'
+                    //     // sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
+                    //     // sh 'chmod u+x ./kubectl' 
+                    //     sh 'kubectl get pods'
+                    //     // sh './kubectl apply -f ./k8s -R'
+                    //     // kubernetesDeploy (configs: '**/k8s/**', kubeconfigId: 'kubernetes')
+                    // }
             }
         }
 
