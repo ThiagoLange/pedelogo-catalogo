@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: thiagolange/pedelogo-catalogo:{{tag}}
+        image: thiagolange/api-produto2:{{tag}}
         ports:
         - containerPort: 80
           name: http
