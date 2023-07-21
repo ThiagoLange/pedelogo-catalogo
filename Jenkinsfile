@@ -39,7 +39,7 @@ pipeline {
                 tag_version = "${env.BUILD_ID}"
             }
             steps {
-            withKubeConfig([credentialsId: 'kubeconf', serverUrl: 'https://192.168.56.3']){
+            withKubeConfig([credentialsId: 'kubeconf', serverUrl: 'https://192.168.56.3:34129']){
                 sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/api/deployment.yaml'
                 sh 'cat ./k8s/api/deployment.yaml'
                 sh 'curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"'
